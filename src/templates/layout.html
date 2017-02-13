@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="keywords" content="suggestion, box, css3 comment, simple">
+    <meta name="description" content="Suggestion Box created by Joseph Kagiri - Andela Bootcamp Project">
+
+    <!-- Link the stylesheets files-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+
+        {% block body %}
+        {% endblock %}
+
+        <footer id="footer">
+
+        </footer>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
