@@ -1,3 +1,14 @@
 html, body{
-    background-color: #CCC;
+    background-color: #FFF;
+}
+/*Login Section*/
+.login{
+    margin-top: 100px;
+}
+#forgot-password{
+    float:right;
+    font-size: 80%;
+    position:relative;
+    top: -15px;
+    left: -10px;
 }
