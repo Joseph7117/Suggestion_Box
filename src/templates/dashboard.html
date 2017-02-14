@@ -5,5 +5,23 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Hello {{ email }}</h2>
+    <nav class="navbar navbar-default" style="margin-top:30px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapse" aria-expanded="false" aria-controls="navbar">
+                </button>
+                <a class="navbar-brand">Suggestion Box</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row col-md-12">
+        <!--Left Sidebar Containing the Suggestions-->
+        <div class="section-suggestions col-md-8">
+
+        </div>
+        <div class="new-suggestions col-md-4"></div>
+    </div>
+
+    <!-- Right Sidebar to Create the Suggestions -->
+
 {% endblock %}

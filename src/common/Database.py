@@ -5,7 +5,7 @@ from pymongo import MongoClient
 
 class Database(object):
     #Defining the Database and URI as static variables
-    URI = "mongodb://127.0.0.1/:27017"
+    URI = 'mongodb://127.0.0.1:27017'
     DATABASE = None
 
     #Ensure the instance of the Database Class is shared across all methods thus making the models static
@@ -17,14 +17,12 @@ class Database(object):
     @staticmethod
     def insert_data(collection, data):
         Database.DATABASE[collection].insert(data)
+        return True
 
     @staticmethod
-    def find_by_id(collection, query):
-        Database.DATABASE[collection].find(query)
-    @staticmethod
-    def find_by_email(collection, query):
-        Database.DATABASE[collection].find(query)
+    def find(collection, query):
+        return Database.DATABASE[collection].find(query)
 
     @staticmethod
-    def find_all(collection, query):
-        Database.DATABASE[collection].find_one(query)
+    def find_one(collection, query):
+        return Database.DATABASE[collection].find_one(query)

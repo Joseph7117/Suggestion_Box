@@ -1,35 +1,37 @@
 '''
 Defining the User Model
 '''
+import uuid
+
 from flask import session
 
 from src.common.Database import Database
 
 class User(object):
-    def __init__(self, name, email, password, id=None):
-        self.name = name
+
+    def __init__(self, email, password, _id=None):
         self.email = email
         self.password = password
-        self.id = id
+        self._id = uuid.uuid4().hex if _id is None else _id
 
     @classmethod
     def get_by_id(cls, id):
-        data = Database.find_by_id("users", {"id":id})
+        data = Database.find_one("users", {"_id": id})
         if data is not None:
-            return cls(**data)
+            return User(data["email"], data["password"])
 
-    @classmethod   #Object will not be instiated while finding the user
+    @classmethod
+    #Object will not be instiated while finding the user
     def get_by_email(cls, email):
-        data = Database.find_by_email("users", {"email":email})
+        data = Database.find_one("users", {"email": email})
         if data is not None:
-            return cls(**data)
+            return User(data["email"], data["password"])
 
     @staticmethod
     def is_login_valid(email, password):
         #Check if user's email matches the password they keyed in
         user = User.get_by_email(email)
         if user is not None:
-            #Lets check the password
             return user.password == password
         return False
 
@@ -48,16 +50,15 @@ class User(object):
             return False
 
     @staticmethod
-    def login(name, email):
+    def login(email):
         #Store User's information in a Session if after verification ie. is_login_valid()
-        session['name'] = name
         session['email'] = email
 
     @staticmethod
     def logout():
-        session['name'] = None
         session['email'] = None
 
+    #Getting suggestions for a specific user_id
     def get_suggestions(self):
         pass
 
