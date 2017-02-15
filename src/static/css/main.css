@@ -12,3 +12,40 @@ html, body{
     top: -15px;
     left: -10px;
 }
+
+/*Custom Styles for the Dashboard*/
+@media ( min-width: 768px ) {
+    .grid-divider {
+        position: relative;
+        padding: 0;
+    }
+    .grid-divider>[class*='col-'] {
+        position: static;
+    }
+    .grid-divider>[class*='col-']:nth-child(n+2):before {
+        content: "";
+        border-left: 1px solid #DDD;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+    .col-padding {
+        padding: 0 15px;
+    }
+}
+.main-dashboard{
+    font-family:'Oswald';
+}
+textarea{
+    resize: none;
+}
+#reactions-modal{
+    top:5%;
+}
+a{
+    text-decoration: none;
+    color:#000;
+}
+.input-checkbox{
+    font-weight:300;
+}

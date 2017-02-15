@@ -17,7 +17,6 @@ class Database(object):
     @staticmethod
     def insert_data(collection, data):
         Database.DATABASE[collection].insert(data)
-        return True
 
     @staticmethod
     def find(collection, query):

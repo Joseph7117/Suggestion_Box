@@ -9,7 +9,9 @@
 
     <!-- Link the stylesheets files-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
     <title>{% block title %} {% endblock %}</title>
 </head>
@@ -19,11 +21,10 @@
         {% block body %}
         {% endblock %}
 
-        <footer id="footer">
-
-        </footer>
+        <footer id="footer"></footer>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/custom.js') }}"></script>
 </body>
 </html>

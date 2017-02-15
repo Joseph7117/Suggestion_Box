@@ -9,7 +9,8 @@ from src.common.Database import Database
 
 class User(object):
 
-    def __init__(self, email, password, _id=None):
+    def __init__(self, name, email, password, _id=None):
+        self.name = name
         self.email = email
         self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
@@ -25,7 +26,7 @@ class User(object):
     def get_by_email(cls, email):
         data = Database.find_one("users", {"email": email})
         if data is not None:
-            return User(data["email"], data["password"])
+            return User(data["name"], data["email"], data["password"])
 
     @staticmethod
     def is_login_valid(email, password):
@@ -40,7 +41,7 @@ class User(object):
         user = User.get_by_email(email)
         if user is None:
             #Create the User since he/she does not exist in the database
-            new_user = cls(name, email, password)
+            new_user = User(name, email, password)
             new_user.save_to_db()
             session['name'] = name
             session['email'] = email
@@ -67,7 +68,7 @@ class User(object):
             "name": self.name,
             "email": self.email,
             "password": self.password,
-            "id": self.id
+            "_id": self._id
         }
     def save_to_mongo(self):
         Database.insert_data("users", self.json())

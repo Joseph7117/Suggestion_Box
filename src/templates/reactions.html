@@ -1,0 +1,87 @@
+{% extends "layout.html "%}
+
+{% block title %}
+    Reactions Page
+{% endblock %}
+
+{% block body %}
+    <form class="main-dashboard">
+        <nav class="navbar navbar-default" style="margin-top:30px">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapse" aria-expanded="false" aria-controls="navbar">
+                    </button>
+                    <a class="navbar-brand">Suggestion Box</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Welcome</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Log Out</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="page-header">
+            {% if suggest|length > 0 %}
+            {% for sugtitle in suggest %}
+                <h3>{{ sugtitle['title'] }}<span> </span>Suggestion</h3>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row grid-divider">
+            <div class="col-sm-4">
+                <div class="col-padding">
+                    <h3>Description: </h3>
+                    <p>
+                        {% if suggest|length > 0 %}
+                        {% for sgt in suggest %}
+                        <h2>{{ sgt['description'] }}</h2>
+                        {% endfor %}
+                        {% endif %}
+
+                    </p>
+                </div>
+            </div>
+            <form role="form" action="/reactions" method="post">
+            <div class="col-sm-4">
+                <div class="col-padding">
+                    <h3>React To Suggestion: </h3>
+                    <p>
+                        <label class="input-checkbox">
+                            <input type="checkbox" name="upvoting"/>
+                            <span class="upvoting"><i class="fa fa-thumbs-o-up" style="font-size: 35px"></i>  Do you like this Suggestion? (then up its voting)</span><br/>
+                        </label>
+                    </p>
+                    <p>
+                        <label class="input-checkbox">
+                            <input type="checkbox" name="downvoting"/>
+                            <span class="downvoting"><i class="fa fa-thumbs-o-down" style="font-size: 35px"></i> Do you dislike this Suggestion? (then downvote it)</span><br/>
+                        </label>
+                    </p>
+
+                    <p>
+                        <label class="input-checkbox">
+                            <input type="checkbox" name="flagging">
+                            <span class="flagging"><i class="fa fa-flag-o" style="font-size: 35px"></i>Do you find this Suggestion Offensive? (then flag it offensive)</span><br/>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-padding">
+                    <h3>Leave Comment:</h3>
+                    <textarea class="form-control" rows="10" id="comments-area" style="width:100%" name="comments-area"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:12px; margin-right:12px">
+            <button type="submit" class="pull-right btn btn-success">Post Reaction</button>
+        </div>
+        </form>
+        <hr/>
+        <div class="row">
+                <h3>People's Reactions regarding this Suggestion:</h3>
+        </div>
+</div>
+{% endblock %}
