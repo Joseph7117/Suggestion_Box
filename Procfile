@@ -1,1 +1,1 @@
-web: cd src && python app.py
+web: env PYTHONPATH="$PWD/.." python src/app.py
