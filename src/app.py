@@ -33,9 +33,9 @@ def reactions_display(q=None):
         return redirect(url_for('login_user'))
     return render_template("reactions.html", reactions=reactions, suggest=suggest)
 
-@app.route('/reactions/<q>', methods=['POST'])
-def add_reaction(q=None):
-    suggestions_id = q
+@app.route('/reactions', methods=['POST'])
+def add_reaction():
+    suggestions_id = request.form['suggest_id']
     comment = request.form['comments-area']
     email = session['email']
     date = datetime.datetime.utcnow()
@@ -48,7 +48,7 @@ def add_reaction(q=None):
 
     flash("Thank you for the reaction we shall scrutinize your view")
 
-    return redirect(url_for('reactions_display'))
+    return redirect(url_for('display_dashboard'))
 
 @app.before_first_request
 def init_db():
@@ -69,6 +69,10 @@ def login_user():
         return render_template("dashboard.html", email=email)
     else:
         return render_template("login.html")
+@app.route('/logout')
+def log_out():
+    session['email'] = None
+    return redirect(url_for('login_user'))
 
 @app.route('/auth/signup', methods=['GET'])
 def display_signin():

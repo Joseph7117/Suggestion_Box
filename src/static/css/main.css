@@ -35,12 +35,13 @@ html, body{
 }
 .main-dashboard{
     font-family:'Oswald';
+    background-color: #ADD8E6
 }
 textarea{
     resize: none;
 }
-#reactions-modal{
-    top:5%;
+.post-comments{
+    margin-left:10px;
 }
 a{
     text-decoration: none;
