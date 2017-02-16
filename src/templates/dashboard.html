@@ -5,23 +5,93 @@
 {% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-default" style="margin-top:30px">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapse" aria-expanded="false" aria-controls="navbar">
-                </button>
-                <a class="navbar-brand">Suggestion Box</a>
+    <div class="main-dashboard">
+        <nav class="navbar navbar-default" style="margin-top:30px">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapse" aria-expanded="false" aria-controls="navbar">
+                    </button>
+                    <a class="navbar-brand">Suggestion Box</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Welcome</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Log Out</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="page-header">
+            <h3>Contents in Our Suggestion Box</h3>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-list"></span><span> </span>Posted Suggestions
+                    </div>
+                    <div class="panel-body">
+                        {% if suggestions|length > 0 %}
+                        <ul class="list-group">
+                            {% for sg in suggestions %}
+
+                            <a href="/reactions/{{ sg['board_id'] }}"><li class="list-group-item">
+                                {{ sg['title'] }}
+                            </li></a>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Total Count <span class="label label-info">{{ suggestions|length }}</span></h6>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="pagination pagination-sm pull-right">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-xs-8">
+                    <div class="well">
+                        <form id="suggestionForm" method="post" novalidate="novalidate" action="/suggest">
+                            <div class="form-group">
+                                <label for="suggestion-title" class="control-label">Title</label>
+                                <input type="text" class="form-control" id="suggest-title" name="suggestion-title"
+                                       placeholder="Enter your Suggestion Title"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="suggestion-description" class="control-label">Description</label>
+                                <textarea class="form-control" row="7" id="suggest-description"
+                                          placeholder="Enter your Suggestion Description" name="suggestion-description">
+                                </textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Post</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <p>You can post your suggestions concerning topics related to Technology, Nature
+                        and many disciplines in life. Keep it in mind that your suggestions will be reviewed
+                        by various team members to determine their viability. Thank You.</p>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="row col-md-12">
-        <!--Left Sidebar Containing the Suggestions-->
-        <div class="section-suggestions col-md-8">
-
-        </div>
-        <div class="new-suggestions col-md-4"></div>
     </div>
-
-    <!-- Right Sidebar to Create the Suggestions -->
 
 {% endblock %}
