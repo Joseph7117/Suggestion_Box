@@ -29,9 +29,10 @@ class Suggestions(object):
         return [suggestions for suggestions in Database.find("suggest", {})]
 
     @staticmethod
-    def fetch_reaction(brd_id):
-        return [reactions for reactions in Database.find("reactions", {"suggestion_id": brd_id})]
-
-    @staticmethod
     def fetch_by_id(brd_id):
-        return[suggestion_title for suggestion_title in Database.find("suggest", {"board_id": brd_id})]
+        return [suggestion_title for suggestion_title in Database.find("suggest", {"board_id": brd_id})]
+
+    #detach suggestion when it gets past three reactions
+    @staticmethod
+    def delete_suggestion():
+        pass

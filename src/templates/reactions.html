@@ -16,8 +16,8 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Welcome</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Log Out</a> </li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/logout">Log Out</a> </li>
                     </ul>
                 </div>
             </div>
@@ -27,6 +27,24 @@
             {% for sugtitle in suggest %}
                 <h3>{{ sugtitle['title'] }}<span> </span>Suggestion</h3>
             {% endfor %}
+            {% endif %}
+
+            {% if upvotes|length > 0 %}
+                <span><p>Likes {{ upvotes|length }}</p></span>
+            {% else %}
+                <span><p>Likes <b>0</b></p></span>
+            {% endif %}
+
+            {% if downvotes|length > 0 %}
+                <span><p>Dislikes {{ downvotes|length }}</p></span>
+            {% else %}
+                <span><p>Dislikes <b>0</b></p></span>
+            {% endif %}
+
+            {% if flagged|length > 0 %}
+                <span><p>Flagged Offensive {{ flagged|length }}</p></span>
+            {% else %}
+            <span><p>Flagged Offensive: <b>0</b></p></span>
             {% endif %}
 
             {% with messages = get_flashed_messages() %}
@@ -57,7 +75,6 @@
             <div class="col-sm-4">
                     <div class="col-padding">
                         <h3>React To Suggestion: </h3>
-
                         <input type="hidden" value="{{ suggest[0]['board_id'] }}" name="suggest_id">
                         <p>
                             <label class="input-checkbox">
@@ -74,7 +91,7 @@
 
                         <p>
                             <label class="input-checkbox">
-                                <input type="checkbox" name="flagging">
+                                <input type="checkbox" name="flagging"/>
                                 <span class="flagging"><i class="fa fa-flag-o" style="font-size: 35px"></i>Do you find this Suggestion Offensive? (then flag it offensive)</span><br/>
                             </label>
                         </p>
@@ -93,8 +110,9 @@
         <div class="row post-comments">
             <h3>People's Reaction to this Post: </h3>
             {% if reactions|length > 0 %}
+            <span><p> Numbers of Comments ({{ reactions|length }})</p></span>
             {% for rct in reactions %}
-                <h6 style="margin-top:12px;">{{ rct['comment'] }} by ---------><b> {{ rct['author'] }}</b></h6>
+                <h5 style="margin-top:12px">{{ rct['comment'] }} by ---------><b> {{ rct['author'] }}</b></h5>
             {% endfor %}
             {% endif  %}
         </div>

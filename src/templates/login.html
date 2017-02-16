@@ -14,7 +14,15 @@
                 <div class="panel-body">
                         <form role="form" action="/auth/login" method="POST">
                             <div class="alert alert-danger">
-                                <!-- Incase the Incorrect Username or Password is keyed in-->
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <ul class=flashes>
+                                    {% for message in messages %}
+                                        <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% endwith %}
                             </div>
                             <div class="input-group" style="margin-bottom:12px">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

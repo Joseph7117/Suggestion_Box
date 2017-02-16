@@ -50,3 +50,10 @@ a{
 .input-checkbox{
     font-weight:300;
 }
+.animated-content{
+    margin-top: 100px;
+    font-family: consolas;
+}
+.content-section{
+    margin-left: 50px;
+}

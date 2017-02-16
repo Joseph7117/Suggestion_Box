@@ -26,5 +26,22 @@ class Reactions(object):
             "flagged": self.flagged,
             "id": self._id
         }
+
+    @staticmethod
+    def fetch_reaction(brd_id):
+        return [react for react in Database.find("reactions", {"suggestion_id": brd_id})]
+
     def save_to_db(self):
         Database.insert_data("reactions", self.json())
+
+    @staticmethod
+    def fetch_upvotes(brd_id):
+        return [upreact for upreact in Database.find("reactions", {"suggestion_id": brd_id, "upvote": "on"})]
+
+    @staticmethod
+    def fetch_downvotes(brd_id):
+        return [downreact for downreact in Database.find("reactions", {"suggestion_id": brd_id, "downvote": "on"})]
+
+    @staticmethod
+    def fetch_flagged_bad(brd_id):
+        return [flagged for flagged in Database.find("reactions", {"suggestion_id": brd_id, "flagged": "on"})]

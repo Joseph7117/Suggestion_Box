@@ -30,11 +30,14 @@ def display_dashboard():
 @app.route('/reactions/<q>', methods=['GET'])
 def reactions_display(q=None):
     q = int(q)
-    reactions = Suggestions.fetch_reaction(q)
+    reactions = Reactions.fetch_reaction(str(q))
+    upvotes = Reactions.fetch_upvotes(str(q))
+    downvotes = Reactions.fetch_downvotes(str(q))
+    flagged = Reactions.fetch_flagged_bad(str(q))
     suggest = Suggestions.fetch_by_id(q)
     if session['email'] is None:
         return redirect(url_for('login_user'))
-    return render_template("reactions.html", reactions=reactions, suggest=suggest)
+    return render_template("reactions.html", reactions=reactions, upvotes=upvotes, downvotes=downvotes, flagged=flagged, suggest=suggest)
 
 @app.route('/reactions', methods=['POST'])
 def add_reaction():
@@ -42,14 +45,9 @@ def add_reaction():
     comment = request.form['comments-area']
     email = session['email']
     date = datetime.datetime.utcnow()
-    upvote = request.form.getlist('upvoting')
-    downvote = request.form.getlist('downvoting')
-    flagging = request.form.getlist('flagging')
-
-    print(suggestions_id)
-    print(comment)
-    print(email)
-
+    upvote = request.form.get('upvoting')
+    downvote = request.form.get('downvoting')
+    flagging = request.form.get('flagging')
     react = Reactions(suggestions_id, email, comment, date, upvote, downvote, flagging)
     react.save_to_db()
 
@@ -73,8 +71,9 @@ def login_user():
     validate = User.is_login_valid(email, password)
     if validate is True:
         session['email'] = email
-        return render_template("dashboard.html", email=email)
+        return redirect(url_for('display_dashboard'))
     else:
+        flash("Put in the correct email and password")
         return render_template("login.html")
 @app.route('/logout')
 def log_out():
@@ -121,4 +120,4 @@ def addSuggest():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')

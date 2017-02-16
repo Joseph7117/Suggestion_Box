@@ -18,19 +18,21 @@
 
                         <div class="input-group" style="margin-bottom:12px">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i> </span>
-                            <input type="text" class="form-control" name="username" value="" placeholder="Enter your Name">
+                            <input type="text" class="form-control" name="username" value="" placeholder="Enter your Name"
+                            required />
                         </div>
                         <div class="input-group" style="margin-bottom:12px">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i> </span>
-                            <input type="email" class="form-control" name="email" value="" placeholder="Enter your Email"/>
+                            <input type="email" class="form-control" name="email" value="" required
+                                   placeholder="Enter your Email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"/>
                         </div>
                         <div class="input-group" style="margin-bottom:12px">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" name="password" value="" id="pwd" placeholder="Enter Password"/>
+                            <input type="password" class="form-control" name="password" required value="" id="pwd" placeholder="Enter Password"/>
                         </div>
                         <div class="input-group" style="margin-bottom:12px">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i> </span>
-                            <input type="password" class="form-control" name="cfmpassword" value="" id="cfmpwd" placeholder="Confirm Password"/>
+                            <input type="password" class="form-control" name="cfmpassword" required value="" id="cfmpwd" placeholder="Confirm Password"/>
                         </div>
                         <button type="submit" class="btn btn-success">Sign Up</button>
                     </form>

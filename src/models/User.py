@@ -59,9 +59,6 @@ class User(object):
     def logout():
         session['email'] = None
 
-    #Getting suggestions for a specific user_id
-    def get_suggestions(self):
-        pass
 
     def json(self) -> object:
         return{
