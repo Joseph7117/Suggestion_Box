@@ -16,6 +16,9 @@ app.secret_key = "joeyplus"
 @app.route('/register')
 def register_user():
     return render_template("signup.html")
+@app.route('/')
+def site_root():
+    return render_template("index.html")
 
 @app.route('/dashboard')
 def display_dashboard():
@@ -42,6 +45,10 @@ def add_reaction():
     upvote = request.form.getlist('upvoting')
     downvote = request.form.getlist('downvoting')
     flagging = request.form.getlist('flagging')
+
+    print(suggestions_id)
+    print(comment)
+    print(email)
 
     react = Reactions(suggestions_id, email, comment, date, upvote, downvote, flagging)
     react.save_to_db()

@@ -92,6 +92,11 @@
         </div>
         <div class="row post-comments">
             <h3>People's Reaction to this Post: </h3>
+            {% if reactions|length > 0 %}
+            {% for rct in reactions %}
+                <h6 style="margin-top:12px;">{{ rct['comment'] }} by ---------><b> {{ rct['author'] }}</b></h6>
+            {% endfor %}
+            {% endif  %}
         </div>
     </div>
 {% endblock %}
