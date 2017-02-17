@@ -34,5 +34,5 @@ class Suggestions(object):
 
     #detach suggestion when it gets past three reactions
     @staticmethod
-    def delete_suggestion():
-        pass
+    def delete(brd_id):
+        return [sugg_ttle for sugg_ttle in Database.remove("suggest", {"board_id": brd_id})]

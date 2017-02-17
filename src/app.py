@@ -23,6 +23,7 @@ def site_root():
 @app.route('/dashboard')
 def display_dashboard():
     suggestions = Suggestions.fetch_suggestions()
+
     if session['email'] is None:
         return redirect(url_for('login_user'))
     return render_template("dashboard.html", suggestions=suggestions)
@@ -35,6 +36,9 @@ def reactions_display(q=None):
     downvotes = Reactions.fetch_downvotes(str(q))
     flagged = Reactions.fetch_flagged_bad(str(q))
     suggest = Suggestions.fetch_by_id(q)
+
+    #flag the bad suggestion
+
     if session['email'] is None:
         return redirect(url_for('login_user'))
     return render_template("reactions.html", reactions=reactions, upvotes=upvotes, downvotes=downvotes, flagged=flagged, suggest=suggest)
